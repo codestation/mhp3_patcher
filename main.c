@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
 {
 	SceCtrlData pad;
 	pspDebugScreenInit();
-	pspDebugScreenPrintf("Parche MHP3rd v1.1 - Codestation/Sirius/Bemon!o\n\n");
+	pspDebugScreenPrintf("Parcheador MHP3rd v1.3 - Codestation/Sirius/Bemon!o\n\n");
 	pspDebugScreenPrintf("Presione O parchear la ISO\n");
 	pspDebugScreenPrintf("Presione [] para quitar el parche\n");
 	pspDebugScreenPrintf("Presione X para salir\n");
