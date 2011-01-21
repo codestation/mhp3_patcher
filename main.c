@@ -32,8 +32,8 @@ PSP_HEAP_SIZE_MAX();
 
 unsigned char signature[] = {0xD6, 0xE3, 0x69, 0xA0, 0x53, 0x0E, 0xE5, 0x23, 0x45, 0xB1, 0xA4, 0xCC, 0xC6, 0x79, 0x8E, 0xEC};
 
-SceSize patch_offset[32];
-unsigned int patch_size[32];
+SceSize patch_offset[256];
+unsigned int patch_size[256];
 unsigned int patch_count = 0;
 SceSize data_start = 0;
 
