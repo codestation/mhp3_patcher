@@ -23,6 +23,7 @@
 #include <string.h>
 #include <pspiofilemgr.h>
 #include <stdio.h>
+#include <malloc.h>
 
 PSP_MODULE_INFO("MHP3rd Patcher", 0, 1, 0);
 PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER);
@@ -32,8 +33,8 @@ PSP_HEAP_SIZE_MAX();
 
 unsigned char signature[] = {0xD6, 0xE3, 0x69, 0xA0, 0x53, 0x0E, 0xE5, 0x23, 0x45, 0xB1, 0xA4, 0xCC, 0xC6, 0x79, 0x8E, 0xEC};
 
-SceSize patch_offset[256];
-unsigned int patch_size[256];
+SceSize *patch_offset;
+unsigned int *patch_size;
 unsigned int patch_count = 0;
 SceSize data_start = 0;
 
@@ -42,6 +43,8 @@ void fill_tables(SceUID transfd) {
         return;
     sceIoLseek32(transfd, 0, PSP_SEEK_SET);
     sceIoRead(transfd, &patch_count, 4);
+    patch_offset = malloc(patch_count * 4);
+    patch_size = malloc(patch_count * 4);
     int i;
     for(i = 0; i < patch_count; i++) {
         sceIoRead(transfd, &patch_offset[i], 4);
@@ -76,6 +79,8 @@ void write_file(SceUID fd, const char *patch_file, int mode) {
 			}
 			pspDebugScreenPrintf("OK\n");
 		}
+		free(patch_offset);
+		free(patch_size);
 		sceIoClose(patch_fd);
 	} else {
 		pspDebugScreenPrintf("Archivo de parcheo no encontrado\n");
